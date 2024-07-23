@@ -1,0 +1,57 @@
+[2024-06-19T07:42:22.095+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-06-19T07:42:22.187+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-06-19T07:42:10.639860+00:00 [queued]>
+[2024-06-19T07:42:22.221+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-06-19T07:42:10.639860+00:00 [queued]>
+[2024-06-19T07:42:22.223+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-06-19T07:42:22.313+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_wikipedia_data> on 2024-06-19 07:42:10.639860+00:00
+[2024-06-19T07:42:22.330+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'wikipedia_flow', 'transform_wikipedia_data', 'manual__2024-06-19T07:42:10.639860+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/wikipedia_flow.py', '--cfg-path', '/tmp/tmpdm_jupl1']
+[2024-06-19T07:42:22.336+0000] {standard_task_runner.py:91} INFO - Job 15: Subtask transform_wikipedia_data
+[2024-06-19T07:42:22.354+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=1582) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2024-06-19T07:42:22.356+0000] {standard_task_runner.py:63} INFO - Started process 1584 to run task
+[2024-06-19T07:42:22.476+0000] {task_command.py:426} INFO - Running <TaskInstance: wikipedia_flow.transform_wikipedia_data manual__2024-06-19T07:42:10.639860+00:00 [running]> on host dd278de8866b
+[2024-06-19T07:42:22.786+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Ayush Goswami' AIRFLOW_CTX_DAG_ID='wikipedia_flow' AIRFLOW_CTX_TASK_ID='transform_wikipedia_data' AIRFLOW_CTX_EXECUTION_DATE='2024-06-19T07:42:10.639860+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-19T07:42:10.639860+00:00'
+[2024-06-19T07:42:22.788+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-06-19T07:42:23.543+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-06-19T07:42:23.544+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/pipeline/wikipedia_pipeline.py", line 69, in transform_wikipedia_data
+    stadium_df['location']=stadium_df.apply(lambda x: get_lat_long(x["country"],x["stadium"]),axis=1)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/frame.py", line 10034, in apply
+    return op.apply().__finalize__(self, method="apply")
+           ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/apply.py", line 837, in apply
+    return self.apply_standard()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/apply.py", line 965, in apply_standard
+    results, res_index = self.apply_series_generator()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/apply.py", line 981, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/pipeline/wikipedia_pipeline.py", line 69, in <lambda>
+    stadium_df['location']=stadium_df.apply(lambda x: get_lat_long(x["country"],x["stadium"]),axis=1)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/pipeline/wikipedia_pipeline.py", line 58, in get_lat_long
+    location = geolocator.geocode({city},{country})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Nominatim.geocode() takes 2 positional arguments but 3 were given
+[2024-06-19T07:42:23.566+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=wikipedia_flow, task_id=transform_wikipedia_data, run_id=manual__2024-06-19T07:42:10.639860+00:00, execution_date=20240619T074210, start_date=20240619T074222, end_date=20240619T074223
+[2024-06-19T07:42:23.698+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 15 for task transform_wikipedia_data (Nominatim.geocode() takes 2 positional arguments but 3 were given; 1584)
+[2024-06-19T07:42:23.726+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-06-19T07:42:23.790+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-06-19T07:42:23.862+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

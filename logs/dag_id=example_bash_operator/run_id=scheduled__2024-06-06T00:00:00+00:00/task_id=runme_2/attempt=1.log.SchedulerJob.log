@@ -1,0 +1,2 @@
+[2024-06-07T08:07:47.738+0000] {task_context_logger.py:104} ERROR - Executor reports task instance <TaskInstance: example_bash_operator.runme_2 scheduled__2024-06-06T00:00:00+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?
+[2024-06-07T08:19:28.896+0000] {task_context_logger.py:104} ERROR - Executor reports task instance <TaskInstance: example_bash_operator.runme_2 scheduled__2024-06-06T00:00:00+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?
