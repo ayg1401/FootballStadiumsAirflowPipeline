@@ -104,5 +104,5 @@ def write_wikipedia_data(**kwargs):
 
     data.to_csv(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/data/'+filename,index=False)
     # data.to_csv('abfs://footballdataeng@fballdeng.dfs.core.windows.net/data/'+filename,storage_options={
-    #     'account_key':'74B0VZGM1ChL2wYSq+pQkeVF/MaZV6mqoCylVHzo6UGBgG5uvvpwxqcgFT5ZeYDqw9ienpXSqujB+ASts7+iag=='
+    #     'account_key':'sdfgs'
     # },index=False)
